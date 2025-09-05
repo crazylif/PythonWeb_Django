@@ -29,8 +29,7 @@
 
     <!-- Custom CSS -->
     <link href="https://getbootstrap.com/docs/5.3/example/pricing/pricing.css" rel="stylesheet" />
-    <!-- thisssssssssssss -->
-    <link rel="stylesheet" href="style.css"/>
+    
 
     <style>
       /* Add a black background color to the top navigation */
@@ -182,17 +181,24 @@
       </ul>
     </div>
 
+    <!-- Nav bar -->
+    <div class="topnav">
+      <img src="{% static 'image/logo.png' %}" alt="logo" width="50" height="50">
+      <span>Car Shop</span>
+      <a class="active" href="{% url 'home-page' %}">Home</a>
+      <a href="#news">News</a>
+      <a href="">Contact</a>
+      <a href="{% url 'aboutUs-page' %}">About</a>
+      {% if user.is_authenticated %}
+        <a class="py-2 text-dard text-decoration-none" href="#">Hello, {{user.first_name}} [{{user.profile.usertype}}]</a>
+        <a class="py-2 text-dard text-decoration-none" href="{% url 'logout' %}">(log out)</a>
+      {% else %}
+        <a class="py-2 text-dard text-decoration-none" href="{% url 'login' %}">Log in</a>
+      {% endif %}
+    </div>    
+
     <!-- Page Container -->
     <div class="container py-3">
-      <!-- Nav bar -->
-      <img src="{% static 'image/logo.png' %}" alt="logo" width="40" height="32">
-       <div class="topnav">
-        <span>Car Shop</span>
-        <a class="active" href="#home">Home</a>
-        <a href="#news">News</a>
-        <a href="#contact">Contact</a>
-        <a href="#about">About</a>
-      </div>
 
 
       <!-- Header -->
@@ -243,6 +249,7 @@
               <li class="mb-1"><a class="link-secondary text-decoration-none" href="#">Privacy</a></li>
               <li class="mb-1"><a class="link-secondary text-decoration-none" href="#">Terms</a></li>
               <li class="mb-1"><a class="link-secondary text-decoration-none" href="{% url 'aboutUs-page' %}">About us</a></li>
+              <li class="mb-1"><a class="link-secondary text-decoration-none" href="{% url 'contact-page' %}">Contact us</a></li>
             </ul>
           </div>
         </div>
