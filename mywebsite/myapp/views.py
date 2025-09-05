@@ -1,10 +1,14 @@
 import requests
 import json
 
-from django.shortcuts import render
+from django.shortcuts import redirect, render
 from django.http import HttpResponse
 from .models import *
-from django.contrib.auth import authenticate, login
+from django.contrib.auth import authenticate, login, logout
+from django.contrib import messages
+
+
+
 
 def home(request):
   return HttpResponse('<h1>Hello World</h1>')
@@ -20,26 +24,54 @@ def home(request):
 def aboutUs(request):
   return render(request, 'myapp/aboutus.html')
 
-def userLogin(request):
+########### login and logout
+def login_user(request):
   context = {}
-  print("dfdfdfdf")
-  
+
   if request.method == 'POST':
-    data = request.POST.copy()
-    username = data.get('username')
-    password = data.get('password')
+    username = request.POST['username']
+    password = request.POST['password']
+    user = authenticate(request, username=username, password=password)
+    if user is not None:
+      login(request, user)
+      messages.success(request, "You have been logged in.")
+      context['message'] = "You have been logged in."
+      return redirect('home-page')
+    else:
+      messages.success(request, "There was an error, please try again..!")
+      context['message'] = "username or password is incorrect."
+      return redirect('login')
 
-    print(username)
-    print(password)
-    print('---------------------------')
+  else:
+    return render(request, 'myapp/login.html', {})
 
-    try:
-       user = authenticate(username=username, password=password)
-       login(request, user)
-    except:
-       context['message'] = "username or password is incorrect."
+def logout_user(request):
+  logout(request)
+  messages.success(request, ("You have been logged out...!"))
+  return redirect('home-page')
 
-  return render(request, 'myapp/login.html', context)
+###############
+
+# def userLogin(request):
+#   context = {}
+#   print("dfdfdfdf")
+  
+#   if request.method == 'POST':
+#     data = request.POST.copy()
+#     username = data.get('username')
+#     password = data.get('password')
+
+#     print(username)
+#     print(password)
+#     print('---------------------------')
+
+#     try:
+#        user = authenticate(username=username, password=password)
+#        login(request, user)
+#     except:
+#        context['message'] = "username or password is incorrect."
+
+#   return render(request, 'myapp/login.html', context)
 
 def contact(request):
 

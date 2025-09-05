@@ -182,20 +182,38 @@
     </div>
 
     <!-- Nav bar -->
-    <div class="topnav">
+    <div class="topnav position-relative">
       <img src="{% static 'image/logo.png' %}" alt="logo" width="50" height="50">
       <span>Car Shop</span>
       <a class="active" href="{% url 'home-page' %}">Home</a>
       <a href="#news">News</a>
-      <a href="">Contact</a>
-      <a href="{% url 'aboutUs-page' %}">About</a>
       {% if user.is_authenticated %}
-        <a class="py-2 text-dard text-decoration-none" href="#">Hello, {{user.first_name}} [{{user.profile.usertype}}]</a>
-        <a class="py-2 text-dard text-decoration-none" href="{% url 'logout' %}">(log out)</a>
-      {% else %}
-        <a class="py-2 text-dard text-decoration-none" href="{% url 'login' %}">Log in</a>
+        <a href="{% url 'contact-page' %}">Contact</a>
       {% endif %}
-    </div>    
+      <a href="{% url 'aboutUs-page' %}">About</a>
+
+      {% if user.is_authenticated %}
+        <div class="position-absolute top-0 end-0">
+          <a class="py-2 text-dard text-decoration-none" href="#">Hello, {{user.first_name}} [{{user.profile.usertype}}]</a>
+          <a class="py-2 text-dard text-decoration-none" href="{% url 'logout' %}">Logout</a>
+        </div>
+      {% else %}
+        <div class="position-absolute top-0 end-0">
+          <a class="" href="{% url 'login' %}">Login</a>
+        </div>
+      {% endif %}
+
+    </div> 
+      
+      {% if messages %}
+        {% for message in messages %}
+          <div class="alert alert-warning alert-dismissible fade show" role="alert">
+            {{ message }}
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+          </div>
+    
+        {% endfor %}
+      {% endif %}
 
     <!-- Page Container -->
     <div class="container py-3">
