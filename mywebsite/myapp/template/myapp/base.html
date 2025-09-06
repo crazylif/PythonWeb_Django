@@ -136,50 +136,7 @@
 
   <body>
     <!-- Theme toggle -->
-    <div class="dropdown position-fixed bottom-0 end-0 mb-3 me-3 bd-mode-toggle">
-      <button
-        class="btn btn-bd-primary py-2 dropdown-toggle d-flex align-items-center"
-        id="bd-theme"
-        type="button"
-        aria-expanded="false"
-        data-bs-toggle="dropdown"
-        aria-label="Toggle theme (auto)"
-      >
-        <svg class="bi my-1 theme-icon-active" aria-hidden="true">
-          <use href="#circle-half"></use>
-        </svg>
-        <span class="visually-hidden" id="bd-theme-text">Toggle theme</span>
-      </button>
-      <ul class="dropdown-menu dropdown-menu-end shadow" aria-labelledby="bd-theme-text">
-        <li>
-          <button type="button" class="dropdown-item d-flex align-items-center" data-bs-theme-value="light">
-            <svg class="bi me-2 opacity-50" aria-hidden="true">
-              <use href="#sun-fill"></use>
-            </svg>
-            Light
-            <svg class="bi ms-auto d-none" aria-hidden="true"><use href="#check2"></use></svg>
-          </button>
-        </li>
-        <li>
-          <button type="button" class="dropdown-item d-flex align-items-center" data-bs-theme-value="dark">
-            <svg class="bi me-2 opacity-50" aria-hidden="true">
-              <use href="#moon-stars-fill"></use>
-            </svg>
-            Dark
-            <svg class="bi ms-auto d-none" aria-hidden="true"><use href="#check2"></use></svg>
-          </button>
-        </li>
-        <li>
-          <button type="button" class="dropdown-item d-flex align-items-center active" data-bs-theme-value="auto">
-            <svg class="bi me-2 opacity-50" aria-hidden="true">
-              <use href="#circle-half"></use>
-            </svg>
-            Auto
-            <svg class="bi ms-auto d-none" aria-hidden="true"><use href="#check2"></use></svg>
-          </button>
-        </li>
-      </ul>
-    </div>
+    
 
     <!-- Nav bar -->
     <div class="topnav position-relative">
@@ -205,15 +162,15 @@
 
     </div> 
       
-      {% if messages %}
-        {% for message in messages %}
-          <div class="alert alert-warning alert-dismissible fade show" role="alert">
-            {{ message }}
-            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-          </div>
-    
-        {% endfor %}
-      {% endif %}
+    {% if messages %}
+      {% for message in messages %}
+        <div class="alert alert-warning alert-dismissible fade show" role="alert">
+          {{ message }}
+          <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+  
+      {% endfor %}
+    {% endif %}
 
     <!-- Page Container -->
     <div class="container py-3">
@@ -233,13 +190,13 @@
       </main>
 
       <!-- Footer -->
-      <footer class="pt-4 my-md-5 pt-md-5 border-top">
-        <div class="row">
-          <div class="col-12 col-md">
+      <footer class="pt-4 my-md-5 pt-md-10 border-top">
+        <div style="grid-template-columns: 1fr 1fr 1fr 1fr;" class="d-grid gap-auto">
+          <div class="col-8 col-md m-3">
             <img class="mb-2" src="https://getbootstrap.com/docs/5.3/assets/brand/bootstrap-logo.svg" alt="" width="24" height="19" />
             <small class="d-block mb-3 text-body-secondary">&copy; 2017–2025</small>
           </div>
-          <div class="col-6 col-md">
+          <div class="col-10 col-md">
             <h5>Features</h5>
             <ul class="list-unstyled text-small">
               <li class="mb-1"><a class="link-secondary text-decoration-none" href="#">Cool stuff</a></li>
@@ -250,7 +207,7 @@
               <li class="mb-1"><a class="link-secondary text-decoration-none" href="#">Last time</a></li>
             </ul>
           </div>
-          <div class="col-6 col-md">
+          <div class="col-7 col-md">
             <h5>Resources</h5>
             <ul class="list-unstyled text-small">
               <li class="mb-1"><a class="link-secondary text-decoration-none" href="#">Resource</a></li>
@@ -259,7 +216,7 @@
               <li class="mb-1"><a class="link-secondary text-decoration-none" href="#">Final resource</a></li>
             </ul>
           </div>
-          <div class="col-6 col-md">
+          <div class="col-7 col-md">
             <h5>About</h5>
             <ul class="list-unstyled text-small">
               <li class="mb-1"><a class="link-secondary text-decoration-none" href="#">Team</a></li>
