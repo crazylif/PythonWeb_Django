@@ -7,7 +7,10 @@ from .models import *
 from django.contrib.auth import authenticate, login, logout
 from django.contrib import messages
 
+from dotenv import load_dotenv
+import os
 
+load_dotenv() # take environment variables from .env.
 
 
 def home(request):
@@ -101,8 +104,10 @@ def contact(request):
     print('---------------------------')
 
     # Example usage:
-    channel_access_token = "w/Z5V72x/AtK7/Ix8dSjhayhuRyQ6svtbj2qCHRreIwBssebUjTpShVltYWMj/BL4A/VH2FX7XfjN46FcC91r5BHd+9WsaEfhK/PC+tSjW4AGXi0nW3fJH8duygnOcWJiXFMV60WPzTbb5/R0kIPFgdB04t89/1O/w1cDnyilFU="
-    user_id = "U9d31c54e1b22ec3cf731814c95d75bf1"
+    channel_access_token = os.getenv("channel_access_token")
+    user_id = os.getenv("user_id")
+    print("=====================")
+    print(channel_access_token,"  ||||  ",user_id)
     send_line_message(user_id, "contact message:\ntopic:{0}\nemail:{1}\ndetail:{2}"\
                       .format(topic, email, detail), channel_access_token)
 
