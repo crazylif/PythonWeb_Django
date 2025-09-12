@@ -2,6 +2,15 @@
 
 {% block myheader %}
   <h1>this is the content form block myheader</h1>
+
+  {% if user.profile.usertype == 'vvip' %}
+    <center> 15% Discount for VIP member </center>
+  {% elif user.profile.usertype == 'vip' %}
+    <center> 10% Discount for VIP member </center>
+  {% elif user.profile.usertype == 'member' %}
+    <center> 5% Discount for VIP member </center>
+  {% endif %}
+
 {% endblock myheader %}
 
 {% block content %}
@@ -15,5 +24,6 @@
         stock : {{ data.quantity}}<br>
       </p>
     {% endfor %}
+
   </center>
 {% endblock content %}

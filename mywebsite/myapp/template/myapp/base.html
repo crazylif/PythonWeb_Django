@@ -151,7 +151,10 @@
 
       {% if user.is_authenticated %}
         <div class="position-absolute top-0 end-0">
-          <a class="py-2 text-dard text-decoration-none" href="#">Hello, {{user.first_name}} [{{user.profile.usertype}}]</a>
+          {% if user.profile.usertype == 'admin' %}
+            <a class="py-2 text-dard text-decoration-none" href="{% url 'showcontact-page' %}">show contact</a>
+          {% endif %}
+          <a class="py-2 text-dard text-decoration-none" href="{% url 'profile-page' %}">Hello, {{user.first_name}} [{{user.profile.usertype}}]</a>
           <a class="py-2 text-dard text-decoration-none" href="{% url 'logout' %}">Logout</a>
         </div>
       {% else %}

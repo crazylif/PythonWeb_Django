@@ -5,6 +5,7 @@ from django.shortcuts import redirect, render
 from django.http import HttpResponse
 from .models import *
 from django.contrib.auth import authenticate, login, logout
+from django.contrib.auth.models import User
 from django.contrib import messages
 
 from dotenv import load_dotenv
@@ -26,6 +27,41 @@ def home(request):
 
 def aboutUs(request):
   return render(request, 'myapp/aboutus.html')
+
+########## register 
+def userRegist(request):
+  context={}
+  if request.method == 'POST':
+    data = request.POST.copy()
+    firstname = data.get('firstname')
+    lastname = data.get('lastname')
+    username = data.get('username')
+    email = data.get('email')
+    password = data.get('password')
+    repassword = data.get('repassword')
+
+    try:
+      User.objects.get(username=username)
+      context['message'] = "Username duplicate"
+    except:
+      newuser = User()
+      newuser.username = username
+      newuser.first_name = firstname
+      newuser.last_name = lastname
+      newuser.email = email
+
+      if (password == repassword):
+        newuser.set_password(password)
+        newuser.save()
+        newprofile = Profile()
+        newprofile.user = User.objects.get(username=username)
+        newprofile.save()
+        context['message'] = "register complate."
+      else:
+        context['message'] = "password or re-password is incorrect."
+  return render(request, 'myapp/register.html', context)
+
+##############
 
 ########### login and logout
 def login_user(request):
@@ -54,6 +90,46 @@ def logout_user(request):
   return redirect('home-page')
 
 ###############
+
+######## edit profile
+def editProfile(request):
+  context = {}
+  if request.method == 'POST':
+    data = request.POST.copy()
+    firstname = data.get('firstname')
+    lastname = data.get('lastname')
+    username = data.get('username')
+    email = data.get('email')
+    password = data.get('password')
+
+    current_user = User.objects.get(id=request.user.id)
+    current_user.first_name = firstname
+    current_user.last_name = lastname
+    current_user.username = username
+    current_user.email = email
+    current_user.set_password(password)
+    current_user.save()
+
+    try:
+      user = authenticate(username=current_user.username,
+                          password=current_user.password)
+      login(request, user)
+      return redirect('home-page')
+    except:
+      context['message'] = "myapp/editprofile.html"
+  return render(request, 'myapp/editprofile.html')
+
+###########
+
+######### user profile
+def userProfile(request):
+  context = {}
+  userprofile = Profile.objects.get(user=request.user)
+  context['profile'] = userprofile
+  return render(request, 'myapp/profile.html', context)
+
+#####
+
 
 # def userLogin(request):
 #   context = {}
@@ -112,6 +188,11 @@ def contact(request):
                       .format(topic, email, detail), channel_access_token)
 
   return render(request, 'myapp/contact.html', context)
+
+def showContact(request):
+  allcontact = contactList.objects.all()
+  context = {'contact': allcontact}
+  return render(request, 'myapp/showcontact.html', context)
 
 def send_line_message(user_id: str, message: str, channel_access_token: str):
   """
