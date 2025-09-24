@@ -1,4 +1,9 @@
 #ignore node_modules directory
+
 node_modules/
 .env
+<<<<<<< HEAD
+=======
+myapp/migration/
+>>>>>>> c742fa506bb1c417f8d1a7268cda49e77a77f790
 myenv/
