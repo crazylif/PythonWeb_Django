@@ -6,6 +6,7 @@
 ---- how to run server -----
 1: python manage.py runserverd
 
+
 ---- pip list ----
 install: pip install
 1: django
