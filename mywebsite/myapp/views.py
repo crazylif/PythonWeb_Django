@@ -179,7 +179,7 @@ def contact(request):
     print(detail)
     print('---------------------------')
 
-    # Example usage:
+    #### fetch to line message api
     channel_access_token = os.getenv("channel_access_token")
     user_id = os.getenv("user_id")
     print("=====================")

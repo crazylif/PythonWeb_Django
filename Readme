@@ -9,15 +9,3 @@
 ---- if have some error try to pip instal this ---
 1: pip install Pyrebase4
 2: pip install python-dotenv
-
-
----- pip list ----
-install: pip install
-1: django
-2: requests
-3: python-dotenv
-
-
----- make migrations ----
-1: python manage.py makemigrations [app_name]
-2: python manage.py migrate [app_name]
