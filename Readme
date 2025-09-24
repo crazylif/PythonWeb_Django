@@ -4,14 +4,11 @@
 
 
 ---- how to run server -----
-<<<<<<< HEAD
--: python manage.py runserver
+1: python manage.py runserver
 
 ---- if have some error try to pip instal this ---
 1: pip install Pyrebase4
 2: pip install python-dotenv
-=======
-1: python manage.py runserverd
 
 
 ---- pip list ----
@@ -24,4 +21,4 @@ install: pip install
 ---- make migrations ----
 1: python manage.py makemigrations [app_name]
 2: python manage.py migrate [app_name]
->>>>>>> c742fa506bb1c417f8d1a7268cda49e77a77f790
+
