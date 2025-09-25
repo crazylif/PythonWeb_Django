@@ -8,6 +8,7 @@ from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.models import User
 from django.contrib import messages
 
+
 from dotenv import load_dotenv
 import os
 
@@ -226,8 +227,46 @@ def send_line_message(user_id: str, message: str, channel_access_token: str):
 
 def actionPage(request, cid):
   # id = contactList
-  context = {}
-  contact = contactList.objects.get(id=cid)
-  context['contact'] = contact
-  return render(request, 'myapp/action.html', context)
+  try:
+    context = {}
+    contact = contactList.objects.get(id=cid)
+    context['contact'] = contact
+
+    try:
+      action = Action.objects.get(contactList=contact)
+      context['action'] = action
+    except:
+      pass
+
+    if request.method == 'POST':
+      data = request.POST.copy()
+      actiondetail = data.get('actiondetail')
+
+      if 'save' in data:
+        try:
+          check = Action.objects.get(contactList=contact)
+          check.actionDetail = actiondetail
+          check.save()
+          context['action'] = check
+        except:
+          new = Action()
+          new.contactList = contact
+          new.actionDetail = actiondetail
+          new.save()
+      elif 'delete' in data:
+        try:
+          contact.delete()
+          return redirect('showcontact-page')
+        except:
+          pass
+      elif 'complete' in data:
+        contact.complete = True
+        contact.save()
+        return redirect('showcontact-page')
+
+    return render(request, 'myapp/action.html', context)
+  
+  except contactList.DoesNotExist:
+    return HttpResponse("<h1 style=\"padding: 30px;\">Contact not found</h1>", status=404)
+
 

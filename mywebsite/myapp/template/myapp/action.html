@@ -14,5 +14,17 @@
       <hr>
     </p>
   </div>
+  <form method="POST">
+    {% csrf_token %}
+    <div class="form-group">
+      <label for="actiondetail">Action Detail:</label>
+      <textarea name="form-control" rows="5" id="actiondetail" name="actiondetail">
+        {{action.actionDetail}}
+      </textarea>
+    </div>
+    <button type="submit" class="btn btn-primary" name="save">Save</button>
+    <button type="submit" class="btn btn-primary" name="delete">Delete</button>
+    <button type="submit" class="btn btn-primary" name="complete">Complete</button>
+  </form>
 
-{% endblock content%}
+{% endblock content %}
