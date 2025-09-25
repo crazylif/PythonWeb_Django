@@ -223,3 +223,11 @@ def send_line_message(user_id: str, message: str, channel_access_token: str):
       print("✅ Message sent successfully!")
   else:
       print(f"❌ Failed: {response.status_code}, {response.text}")
+
+def actionPage(request, cid):
+  # id = contactList
+  context = {}
+  contact = contactList.objects.get(id=cid)
+  context['contact'] = contact
+  return render(request, 'myapp/action.html', context)
+
