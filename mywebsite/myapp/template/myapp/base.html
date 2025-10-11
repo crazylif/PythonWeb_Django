@@ -155,6 +155,7 @@
             <a class="py-2 text-dard text-decoration-none" href="{% url 'showcontact-page' %}">show contact</a>
           {% endif %}
           <a class="py-2 text-dard text-decoration-none" href="{% url 'profile-page' %}">Hello, {{user.first_name}} [{{user.profile.usertype}}]</a>
+          <a class="py-2 text-dard text-decoration-none" href="{% url 'addproduct-page' %}">Add Product</a>
           <a class="py-2 text-dard text-decoration-none" href="{% url 'logout' %}">Logout</a>
         </div>
       {% else %}

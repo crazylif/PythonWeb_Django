@@ -231,3 +231,20 @@ def actionPage(request, cid):
   context['contact'] = contact
   return render(request, 'myapp/action.html', context)
 
+def addProduct(request):
+  if request.method == 'POST':
+    data = request.POST.copy()
+    title = data.get('title')
+    description = data.get('description')
+    price = data.get('price')
+    quantity = data.get('quantity')
+    instock = data.get('instock')
+
+    print(title)
+    print(description)
+    print(price)
+    print(quantity)
+    print(instock)
+    print('File: ', request.FILES)
+
+  return render(request, 'myapp/addProduct.html')
