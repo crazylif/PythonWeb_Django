@@ -1,6 +1,3 @@
 #ignore node_modules directory
 node_modules/
 .env
-myapp\__pycache__
-myapp\migrations
-mywebsite\__pycache__
