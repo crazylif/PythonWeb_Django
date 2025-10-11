@@ -18,7 +18,7 @@ class contactList(models.Model):
   topic = models.CharField(max_length=200)
   email = models.CharField(max_length=100)
   detail = models.CharField(null=True, blank=True)
-  complete = models.CharField(default=False)
+  complete = models.CharField() ##default = null
 
   def __str__(self):
     return self.topic
@@ -33,7 +33,7 @@ class Profile(models.Model):
   
 class Action(models.Model):
   contactList = models.ForeignKey(contactList, on_delete=models.CASCADE)
-  actionDetail = models.TextField()
+  actiondetail = models.CharField()
 
   def __str__(self):
     return self.contactList.topic
