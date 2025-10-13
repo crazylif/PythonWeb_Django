@@ -19,8 +19,14 @@ from django.urls import path, include
 
 from django.contrib.auth import views
 
+
+from django.contrib.staticfiles.urls import static, staticfiles_urlpatterns
+from . import settings
+
+from django.conf.urls import handler404
+
 urlpatterns = [
-    path('admin/', admin.site.urls),
+    path('admin/', admin.site.urls, name="admin-page"),
     path('', include('myapp.urls')),
     # path('login/', views.LoginView.as_view\
     #      (template_name='myapp/login.html'), name='login'),
@@ -28,3 +34,8 @@ urlpatterns = [
     #      (template_name='myapp/logout.html'), name='logout'),
     
 ]
+
+urlpatterns += staticfiles_urlpatterns()
+urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+
+handler404 = 'mywebsite.views.handler404'

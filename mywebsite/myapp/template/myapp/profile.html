@@ -24,4 +24,10 @@
     Type:{{user.profile.usertype}}
   </div>
   <p><a href="{% url 'editprofile-page' %}">Edit Profile</a></p>
+  <br><br><br>
+  {% if user.profile.usertype == 'admin' %}
+  <div>
+    <a href="{% url 'admin-page' %}">Admin page</a>
+  </div>
+  {% endif %}
 {% endblock content %}

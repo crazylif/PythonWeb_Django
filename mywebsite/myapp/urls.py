@@ -1,5 +1,7 @@
 from django.urls import path
 
+from django.contrib import admin
+
 # from .views import home,home2,aboutUs
 from .views import *
 # from django.contrib.auth import views
@@ -18,6 +20,7 @@ urlpatterns = [
   path('editprofile/', editProfile, name="editprofile-page"),
   path('action/<int:cid>/', actionPage, name="action-page"),
   path('addproduct/', addProduct, name="addproduct-page"),
+  path('admin/', views.adminPage, name='admin-page'),
   
 
 ]

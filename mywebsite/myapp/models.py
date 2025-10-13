@@ -11,9 +11,13 @@ class Product(models.Model):
   quantity = models.IntegerField(null=True, blank=True)
   instock = models.BooleanField(default=True)
 
+  # file
+  picture = models.ImageField(upload_to="product", null=True, blank=True)
+  specfile = models.FileField(upload_to="specfile", null=True, blank=True)
+
   def __str__(self):
     return self.title
-  
+
 class contactList(models.Model):
   topic = models.CharField(max_length=200)
   email = models.CharField(max_length=100)
