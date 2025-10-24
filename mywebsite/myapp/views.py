@@ -274,17 +274,21 @@ def actionPage(request, cid):
           check.actionDetail = actiondetail
           check.save()
           context['action'] = check
+          return redirect('showcontact-page')
         except:
           new = Action()
           new.contactList = contact
           new.actionDetail = actiondetail
           new.save()
+          return redirect('showcontact-page')
+        
       elif 'delete' in data:
         try:
           contact.delete()
           return redirect('showcontact-page')
         except:
           pass
+        
       elif 'complete' in data:
         contact.complete = True
         contact.save()
