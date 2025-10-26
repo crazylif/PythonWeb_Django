@@ -349,3 +349,8 @@ def addProduct(request):
     print('File: ', request.FILES)
 
   return render(request, 'myapp/addProduct.html')
+
+# def handler404(request, exception):
+#   return render(request, 'myapp/404errorPage.html')
+
+

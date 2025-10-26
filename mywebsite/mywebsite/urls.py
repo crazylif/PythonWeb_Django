@@ -24,6 +24,8 @@ from . import settings
 
 from django.conf.urls import handler404
 
+from django.shortcuts import redirect, render
+
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include('myapp.urls')),
@@ -38,7 +40,16 @@ urlpatterns += staticfiles_urlpatterns()
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 
 if settings.DEBUG:
-    urlpatterns += static(settings.STATIC_URL, document_root=settings.STATICFILES_DIRS[0])
+    # urlpatterns += static(settings.STATIC_URL, document_root=settings.STATICFILES_DIRS[0])
+    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+    urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
 
 
-# handler404 = 'mywebsite.views.handler404'
+
+
+
+
+def error404(request, exception):
+  return render(request, 'myapp/404errorPage.html')
+
+handler404 = error404

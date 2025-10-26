@@ -22,11 +22,17 @@
           <div class="col">
             <div class="card" style="width: 18rem;">
             {% if c.picture %}
-              <img src="{{ c.picture.url }}" width="250" height="300" alt="picture">aa
+              <img src="{{ c.picture.url }}" height="350" alt="picture" class="card-img-top">
             {% endif %}
               <div class="card-body">
                 <h5 class="card-title">{{ c.title }}</h5>
-                <p class="card-text">{{ c.price }} ฿</p>
+                <p class="card-text">
+                  price : {{ c.price }} ฿ <br>
+                  stock : {{ c.quantity }} <br>
+                  {% if c.specfile %}
+                    specfile : <a href="{{ c.specfile.url }}"> download </a>
+                  {% endif %}
+                </p>
                 <a href="#" class="btn btn-primary">more detail</a>
               </div>
             </div>

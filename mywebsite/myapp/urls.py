@@ -17,7 +17,7 @@ urlpatterns = [
   path('profile/', userProfile, name="profile-page"),
   path('editprofile/', editProfile, name="editprofile-page"),
   path('action/<int:cid>/', actionPage, name="action-page"),
-    path('addproduct/', addProduct, name="addproduct-page"),
+  path('addproduct/', addProduct, name="addproduct-page"),
   path('admin/', views.adminPage, name='admin-page'),
 
 ]
