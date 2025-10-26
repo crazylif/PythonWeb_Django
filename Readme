@@ -1,0 +1,11 @@
+#### use env ####
+# 1: python -m venv myenv
+# 2(command prompt): myenv\Scripts\activate.bat
+
+
+#### how to run server ####
+# 1: python manage.py runserver
+
+#### if have some error try to pip instal this ####
+# 1: pip install Pyrebase4
+# 2: pip install python-dotenv

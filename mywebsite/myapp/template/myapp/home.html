@@ -1,0 +1,98 @@
+{% extends 'myapp/base.html' %}
+
+{% block myheader %}
+  <h1>this is the content form block myheader</h1>
+
+  {% if user.profile.usertype == 'vvip' %}
+    <center> 15% Discount for VIP member </center>
+  {% elif user.profile.usertype == 'vip' %}
+    <center> 10% Discount for VIP member </center>
+  {% elif user.profile.usertype == 'member' %}
+    <center> 5% Discount for VIP member </center>
+  {% endif %}
+
+{% endblock myheader %}
+
+{% block content %}
+  <h1>this is the content from home Made By ALIF</h1>
+  <center>
+    {% for row in allrow %}
+      <div class="row row-cols-1 row-cols-md-3 md-3 test-center">
+        {% for c in row %}
+          <div class="col">
+            <div class="card" style="width: 18rem;">
+            {% if c.picture %}
+              <img src="{{ c.picture.url }}" width="250" height="300" alt="picture">aa
+            {% endif %}
+              <div class="card-body">
+                <h5 class="card-title">{{ c.title }}</h5>
+                <p class="card-text">{{ c.price }} ฿</p>
+                <a href="#" class="btn btn-primary">more detail</a>
+              </div>
+            </div>
+          </div>
+        {% endfor %}
+      </div>
+    {% endfor %}
+  </center>
+  <hr>
+  <p>DEBUG: {{ allproduct }}</p>
+  <p>Has next: {{ allproduct.has_next }}</p>
+  <p>Has previous: {{ allproduct.has_previous }}</p>
+  <p>Total pages: {{ allproduct.paginator.num_pages }}</p>
+
+  <nav aria-label="...">
+    <ul class="pagination">
+      {% if allproduct.has_previous %}
+        <li class="page-item">
+          <a class="page-link" href="?page={{ allproduct.previous_page_number }}">Previous</a>
+        </li>
+
+        {% if allproduct.number|add:-2 > 0  %}
+          <li class="page-item">
+            <a class="page-link" href="?page={{allproduct.number|add:-2}}">{{allproduct.number|add:-2}}</a>
+          </li>
+        {% endif %}
+
+        {% if allproduct.number > 1  %}
+          <li class="page-item">
+            <a class="page-link" href="?page={{allproduct.number|add:-1}}">{{allproduct.number|add:-1}}</a>
+          </li>
+        {% endif %}
+
+        {% if allproduct.has_next != True %}
+        <li class="page-item active">
+          <a class="page-link" href="{{allproduct.number}}">{{allproduct.number}}</a>
+        </li>
+        {% endif %}
+
+      {% endif %}  
+
+
+      {% if allproduct.has_next %}
+        <li class="page-item active">
+          <a class="page-link" href="{{allproduct.number}}">{{allproduct.number}}</a>
+        </li>
+
+        {% if allproduct.paginator.num_pages > allproduct.number %}
+          <li class="page-item">
+            <a class="page-link" href="?page={{allproduct.number|add:1}}">{{allproduct.number|add:1}}</a>
+          </li>
+        {% endif %}
+
+        {% if allproduct.paginator.num_pages > allproduct.number|add:1 %}
+          <li class="page-item">
+            <a class="page-link" href="?page={{allproduct.number|add:2}}">{{allproduct.number|add:2}}</a>
+          </li>
+        {% endif %}
+
+        <li class="page-item">
+          <a class="page-link" href="?page={{allproduct.number|add:1}}">Next</a>
+        </li>
+      {% endif %}
+
+    </ul>
+    <p> page {{allproduct.number}} from {{allproduct.paginator.num_pages}} </p>
+  </nav>
+
+{% endblock content %}

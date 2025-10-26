@@ -1,0 +1,33 @@
+{% extends 'myapp/base.html' %}
+
+{% block myheader %}
+  <h1>MY Profile</h1>
+{% endblock myheader %} 
+
+{% block content %}
+  <div class="form-group">
+    Username:{{profile.user.username}}
+  </div>
+  <div class="form-group">
+    Firstname:{{profile.user.first_name}}
+  </div>
+  <div class="form-group">
+    Lastname:{{profile.user.last_name}}
+  </div>
+  <div class="form-group">
+    Email:{{profile.user.email}}
+  </div>
+  <div class="form-group">
+    Point:{{user.profile.point}}
+  </div>
+  <div class="form-group">
+    Type:{{user.profile.usertype}}
+  </div>
+  <p><a href="{% url 'editprofile-page' %}">Edit Profile</a></p>
+  <br><br><br>
+  {% if user.profile.usertype == 'admin' %}
+  <div>
+    <a href="{% url 'admin-page' %}">Admin page</a>
+  </div>
+  {% endif %}
+{% endblock content %}
